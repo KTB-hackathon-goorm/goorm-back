@@ -1,4 +1,4 @@
-package dev.ktb_hackathon.goorm.plogging.entity;
+package dev.ktb_hackathon.goorm.post.entity;
 
 import dev.ktb_hackathon.goorm.member.entity.MemberEntity;
 import jakarta.persistence.*;
@@ -10,10 +10,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Plogging")
+@Table(name = "post")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PloggingEntity {
+public class PostEntity {
 
     @Id
     @GeneratedValue
@@ -36,7 +36,7 @@ public class PloggingEntity {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    public PloggingEntity(MemberEntity memberEntity, double latitude, double longitude, String imagePath, String content) {
+    public PostEntity(MemberEntity memberEntity, double latitude, double longitude, String imagePath, String content) {
         this.memberEntity = memberEntity;
         this.latitude = latitude;
         this.longitude = longitude;

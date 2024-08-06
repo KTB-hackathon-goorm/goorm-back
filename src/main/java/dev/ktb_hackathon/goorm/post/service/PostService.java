@@ -1,10 +1,10 @@
-package dev.ktb_hackathon.goorm.plogging.service;
+package dev.ktb_hackathon.goorm.post.service;
 
 import dev.ktb_hackathon.goorm.member.entity.MemberEntity;
 import dev.ktb_hackathon.goorm.member.exception.NotFoundMemberException;
 import dev.ktb_hackathon.goorm.member.repository.MemberJpaRepository;
-import dev.ktb_hackathon.goorm.plogging.entity.PloggingEntity;
-import dev.ktb_hackathon.goorm.plogging.repository.PloggingJpaRepository;
+import dev.ktb_hackathon.goorm.post.entity.PostEntity;
+import dev.ktb_hackathon.goorm.post.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,16 +22,16 @@ import java.util.UUID;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class PloggingService {
+public class PostService {
 
     // fixme-noah: image path 변경될 수 있음
-    private final String PLOGGING_PATH = "/src/main/resources/public/images/";
+    private final String POST_PATH = "/src/main/resources/public/images/";
 
     private final MemberJpaRepository memberJpaRepository;
-    private final PloggingJpaRepository ploggingJpaRepository;
+    private final PostJpaRepository postJpaRepository;
 
-    public List<PloggingEntity> searchByPageNumber(int pageNumber) {
-        return ploggingJpaRepository
+    public List<PostEntity> searchByPageNumber(int pageNumber) {
+        return postJpaRepository
                 .findAllToSliceBy(PageRequest.of(pageNumber, 5, Sort.by("id")))
                 .getContent();
     }
@@ -44,16 +44,16 @@ public class PloggingService {
         String imageName = generateImageName(image);
 
         // 절대 경로로 변환 (프로젝트 루트 기준)
-        String absoluteImagePath = System.getProperty("user.dir") + File.separator + PLOGGING_PATH + imageName;
+        String absoluteImagePath = System.getProperty("user.dir") + File.separator + POST_PATH + imageName;
 
         // 데이터베이스에 저장할 경로
         String imageUrl = "/images/" + imageName;
 
-        ploggingJpaRepository
-                .save(new PloggingEntity(foundMemberEntity, latitude, longitude, "http://localhost:8080" + imageUrl, content));
+        postJpaRepository
+                .save(new PostEntity(foundMemberEntity, latitude, longitude, "http://localhost:8080" + imageUrl, content));
 
         // 디렉터리 존재 확인 및 생성
-        File directory = new File(PLOGGING_PATH);
+        File directory = new File(POST_PATH);
 
         if (!directory.exists()) {
             directory.mkdirs();
