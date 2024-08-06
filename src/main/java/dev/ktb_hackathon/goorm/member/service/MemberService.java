@@ -27,4 +27,12 @@ public class MemberService {
             return false;
         }
     }
+
+    @Transactional
+    public void selectTeam(String email, boolean team) {
+        MemberEntity foundMemberEntity = memberJpaRepository.findByEmail(email)
+                .orElseThrow(NotFoundMemberException::new);
+
+        foundMemberEntity.selectTeam(team);
+    }
 }

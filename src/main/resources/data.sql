@@ -69,4 +69,3 @@ VALUES (21, 9223372036854775807, 1.466601, 130.624238, '/images/7.jpg', 'Urban a
 
 INSERT INTO post (id, member_id, latitude, longitude, image_path, content, location, likes, created_at)
 VALUES (22, 9223372036854775805, -64.950234, -177.567302, '/images/5.jpg', 'Urban adventures are so much fun!', 'JEJU', 0, '2024-08-02 09:01:47.767642');
-

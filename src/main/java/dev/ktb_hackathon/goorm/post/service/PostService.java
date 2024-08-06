@@ -38,7 +38,7 @@ public class PostService {
     }
 
     @Transactional
-    public void register(String memberEmail, double latitude, double longitude, MultipartFile image, String content, String location) {
+    public void register(String memberEmail, double latitude, double longitude, MultipartFile image, String content, String location, int point) {
         MemberEntity foundMemberEntity = memberJpaRepository.findByEmail(memberEmail)
                 .orElseThrow(NotFoundMemberException::new);
 
@@ -59,6 +59,8 @@ public class PostService {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+
+        foundMemberEntity.increasePoint(point);
 
         // 이미지 저장
         try {

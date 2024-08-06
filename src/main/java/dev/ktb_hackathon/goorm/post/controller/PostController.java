@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -21,6 +22,6 @@ public class PostController {
 
     @PostMapping("/post")
     public void register(RegisterPostRequest request) {
-        postService.register(request.memberEmail(), request.latitude(), request.longitude(), request.image(), request.content(), request.location());
+        postService.register(request.memberEmail(), request.latitude(), request.longitude(), request.image(), request.content(), request.location(), request.point());
     }
 }
