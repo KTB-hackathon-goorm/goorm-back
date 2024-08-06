@@ -21,6 +21,6 @@ public class PostController {
 
     @PostMapping("/post")
     public void register(RegisterPostRequest request) {
-        postService.register(request.memberEmail(), request.latitude(), request.longitude(), request.image(), request.content(), request.location());
+        postService.register(request.memberEmail(), request.latitude(), request.longitude(), request.image(), request.content(), request.location(), request.point());
     }
 }
