@@ -3,6 +3,7 @@ package dev.ktb_hackathon.goorm.post.service;
 import dev.ktb_hackathon.goorm.member.entity.MemberEntity;
 import dev.ktb_hackathon.goorm.member.exception.NotFoundMemberException;
 import dev.ktb_hackathon.goorm.member.repository.MemberJpaRepository;
+import dev.ktb_hackathon.goorm.post.domain.Location;
 import dev.ktb_hackathon.goorm.post.entity.PostEntity;
 import dev.ktb_hackathon.goorm.post.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class PostService {
     }
 
     @Transactional
-    public void register(String memberEmail, double latitude, double longitude, MultipartFile image, String content) {
+    public void register(String memberEmail, double latitude, double longitude, MultipartFile image, String content, String location) {
         MemberEntity foundMemberEntity = memberJpaRepository.findByEmail(memberEmail)
                 .orElseThrow(NotFoundMemberException::new);
 
@@ -50,7 +51,7 @@ public class PostService {
         String imageUrl = "/images/" + imageName;
 
         postJpaRepository
-                .save(new PostEntity(foundMemberEntity, latitude, longitude, "http://localhost:8080" + imageUrl, content));
+                .save(new PostEntity(foundMemberEntity, latitude, longitude, "http://localhost:8080" + imageUrl, content, getLocation(location)));
 
         // 디렉터리 존재 확인 및 생성
         File directory = new File(POST_PATH);
@@ -81,5 +82,24 @@ public class PostService {
         }
 
         return extension;
+    }
+
+    private Location getLocation(String location) {
+        return switch (location) {
+            case "한경" -> Location.HANGYEONG;
+            case "한림" -> Location.HALLIM;
+            case "애월" -> Location.AEWOL;
+            case "제주" -> Location.JEJU;
+            case "조천" -> Location.JOCHEON;
+            case "구좌" -> Location.GUJWA;
+            case "대정" -> Location.DAEJEONG;
+            case "안덕" -> Location.ANDEOK;
+            case "중문" -> Location.JUNGMUN;
+            case "서귀포" -> Location.SEOGWIPO;
+            case "남원" -> Location.NAMWON;
+            case "표선" -> Location.PYOSEON;
+            case "성산" -> Location.SONGSAN;
+            default -> Location.JEJU;
+        };
     }
 }
