@@ -25,13 +25,16 @@ public class MemberEntity {
 
     private boolean isFirstLogin;
 
+    private boolean team;
+
     private int point;
 
-    public MemberEntity(String email, String password, String nickname) {
+    public MemberEntity(String email, String password, String nickname, boolean team) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.isFirstLogin = true;
+        this.team = team;
     }
 
     public void updateLogin() {
