@@ -1,11 +1,13 @@
 spring:
   application:
     name: goorm
+
   datasource:
     url: jdbc:h2:mem:local;
   h2:
     console:
       enabled: true
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -14,10 +16,11 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+
   sql:
     init:
       mode: embedded
 
-#  servlet:
-#    multipart:
-#      max-file-size: 5MB
+  cors:
+    allowed-origins: '*'
+    allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
