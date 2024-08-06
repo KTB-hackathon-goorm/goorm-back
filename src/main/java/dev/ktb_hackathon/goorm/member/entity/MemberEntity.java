@@ -41,6 +41,10 @@ public class MemberEntity {
         this.isFirstLogin = false;
     }
 
+    public void selectTeam(boolean team) {
+        this.team = team;
+    }
+
     public void increasePoint(int point) {
         this.point += point;
     }
