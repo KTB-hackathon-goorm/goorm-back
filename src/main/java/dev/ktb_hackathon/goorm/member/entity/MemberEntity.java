@@ -23,9 +23,22 @@ public class MemberEntity {
     @Column(unique = true, nullable = false)
     private String nickname;
 
+    private boolean isFirstLogin;
+
+    private int point;
+
     public MemberEntity(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.isFirstLogin = true;
+    }
+
+    public void updateLogin() {
+        this.isFirstLogin = false;
+    }
+
+    public void increasePoint(int point) {
+        this.point += point;
     }
 }

@@ -13,8 +13,9 @@ public class SignController {
 
     private final MemberService memberService;
 
+    // 첫 로그인 시 true
     @PostMapping("/sign-in")
-    public String signIn(@RequestBody SignInRequest request) {
+    public boolean signIn(@RequestBody SignInRequest request) {
         return memberService.signIn(request.email(), request.password());
     }
 }
