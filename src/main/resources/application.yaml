@@ -22,5 +22,5 @@ spring:
       mode: embedded
 
   cors:
-    allowed-origins: '*'
+    allowed-origins: http://localhost:3000,http://localhost:3001
     allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
