@@ -7,12 +7,17 @@ spring:
     console:
       enabled: true
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
         format_sql: true
     show-sql: true
+  sql:
+    init:
+      mode: embedded
+
 #  servlet:
 #    multipart:
 #      max-file-size: 5MB
